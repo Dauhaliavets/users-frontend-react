@@ -1,23 +1,32 @@
 import './App.css';
 
-import { Container } from 'react-bootstrap';
-import Button from 'react-bootstrap/esm/Button';
+import { useState } from 'react';
 import { Outlet } from 'react-router';
 
+import Header from './components/header/Header';
+import { Context } from './context/context';
+import { IUser } from './models/UserModel';
+
 function App() {
+  const [users, setUsers] = useState<IUser[]>([]);
+  const [isAuth, setIsAuth] = useState<boolean>(false);
+
   return (
-    <div className="App">
-      <header className="m-2">
-        <Container className="d-flex gap-2">
-          <Button variant="primary">SignIn</Button>
-          <Button variant="primary">SignUp</Button>
-        </Container>
-      </header>
-      <main>
-        <Outlet />
-      </main>
-      <footer>Created by Dzmitry Dauhaliavets</footer>
-    </div>
+    <Context.Provider
+      value={{
+        users,
+        isAuth,
+        setUsers,
+        setIsAuth,
+      }}
+    >
+      <div className="App">
+        <Header />
+        <main>
+          <Outlet />
+        </main>
+      </div>
+    </Context.Provider>
   );
 }
 
