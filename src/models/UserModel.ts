@@ -1,4 +1,4 @@
-interface User {
+interface IUser {
   _id: number;
   name: string;
   login: string;
@@ -9,6 +9,6 @@ interface User {
   updatedAt: string;
 }
 
-type Users = User[];
+type TUsers = IUser[];
 
-export type { User, Users };
+export type { IUser, TUsers };
