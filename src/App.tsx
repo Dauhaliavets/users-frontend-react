@@ -9,15 +9,15 @@ import { IUser } from './models/UserModel';
 
 function App() {
   const [users, setUsers] = useState<IUser[]>([]);
-  const [isAuth, setIsAuth] = useState<boolean>(false);
+  const [currentUser, setCurrentUser] = useState<IUser | null>(null);
 
   return (
     <Context.Provider
       value={{
         users,
-        isAuth,
+        currentUser,
         setUsers,
-        setIsAuth,
+        setCurrentUser,
       }}
     >
       <div className="App">

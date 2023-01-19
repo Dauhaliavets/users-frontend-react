@@ -3,9 +3,9 @@ import { Dispatch, SetStateAction } from 'react';
 import { IUser } from './UserModel';
 
 interface IContext {
-  isAuth: boolean;
+  currentUser: IUser | null;
   users: IUser[];
-  setIsAuth: Dispatch<SetStateAction<boolean>>;
+  setCurrentUser: Dispatch<SetStateAction<IUser | null>>;
   setUsers: Dispatch<SetStateAction<IUser[]>>;
 }
 export type { IContext };

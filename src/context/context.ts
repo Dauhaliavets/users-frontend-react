@@ -3,9 +3,9 @@ import { createContext } from 'react';
 import { IContext } from '../models/ContextModel';
 
 const Context = createContext<IContext>({
-  isAuth: false,
+  currentUser: null,
   users: [],
-  setIsAuth: () => false,
+  setCurrentUser: () => {},
   setUsers: () => {},
 });
 
