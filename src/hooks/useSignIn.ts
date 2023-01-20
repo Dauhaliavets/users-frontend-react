@@ -1,14 +1,15 @@
 import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router';
 
 import { BASE_URL } from '../constants/baseUrl';
 import { Context } from '../context/context';
 import { checkFilledFields } from '../helpers/checkFilledFields';
-import { IUser } from '../models/UserModel';
 
-const useSignIp = () => {
+const useSignIn = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<{ message: string; error?: any } | null>(null);
   const { setCurrentUser } = useContext(Context);
+  const navigate = useNavigate();
 
   const signIn = async (name: string, password: string): Promise<unknown> => {
     const isFilledFields = checkFilledFields({ name, password });
@@ -31,19 +32,17 @@ const useSignIp = () => {
 
     if (response.ok) {
       const user = await response.json();
-      console.log('user: ', user);
-      console.log('setCurrentUser: ', setCurrentUser);
       setCurrentUser(user);
     } else {
       const errorResponse = await response.json();
-      console.log('errorResponse: ', errorResponse);
       setError(errorResponse);
     }
 
     setIsLoading(false);
+    navigate('/home');
   };
 
   return { signIn, isLoading, error };
 };
 
-export { useSignIp };
+export { useSignIn };

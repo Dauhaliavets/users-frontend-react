@@ -1,17 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Table } from 'react-bootstrap';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import React, { useContext, useEffect, useState } from 'react';
+import { Navigate } from 'react-router';
 
-import { TableColumnTitles } from '../../constants/tableColumnTitles';
-import { Users } from '../../models/User';
+import { BASE_URL } from '../../constants/baseUrl';
+import { Context } from '../../context/context';
+import { TUsers } from '../../models/UserModel';
+import UsersTable from '../table/UsersTable';
+import ToolBar from '../toolBar/ToolBar';
 
 function HomePage() {
-  const [users, setUsers] = useState<Users>([]);
+  const [users, setUsers] = useState<TUsers>([]);
+
+  const { currentUser } = useContext(Context);
+
+  if (!currentUser) {
+    return <Navigate to={'/'} />;
+  }
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('http://localhost:4000/users');
+        const response = await fetch(`${BASE_URL}/users`);
         if (response.ok) {
           const users = await response.json();
           setUsers(users);
@@ -26,34 +34,8 @@ function HomePage() {
 
   return (
     <>
-      <ButtonGroup>
-        <Button variant="secondary">Block</Button>
-        <Button variant="primary">Unblock</Button>
-        <Button variant="danger">Delete</Button>
-      </ButtonGroup>
-      <Table responsive>
-        <thead>
-          <tr>
-            {TableColumnTitles.map((item, index) => (
-              <th key={index}>{item}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user, index) => {
-            return (
-              <tr key={user._id}>
-                <td>{index + 1}</td>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.createdAt}</td>
-                <td>{user.updatedAt}</td>
-                <td>{user.blockedStatus ? 'Blocked' : 'Unblocked'}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </Table>
+      <ToolBar />
+      <UsersTable users={users} />
     </>
   );
 }

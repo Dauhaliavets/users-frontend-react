@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router';
 
 import { BASE_URL } from '../constants/baseUrl';
 import { Context } from '../context/context';
@@ -8,6 +9,7 @@ const useSignUp = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<{ message: string; error?: any } | null>(null);
   const { setCurrentUser } = useContext(Context);
+  const navigate = useNavigate();
 
   const signUp = async (
     name: string,
@@ -43,6 +45,7 @@ const useSignUp = () => {
     }
 
     setIsLoading(false);
+    navigate('/home');
   };
 
   return { signUp, isLoading, error };
