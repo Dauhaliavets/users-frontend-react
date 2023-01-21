@@ -1,1 +1,1 @@
-export const BASE_URL = 'http://localhost:4000';
+export const BASE_URL = 'https://users-api-dauhaliavets.up.railway.app';

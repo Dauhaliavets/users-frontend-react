@@ -24,15 +24,12 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  const [users, setUsers] = useState<IUser[]>([]);
   const [currentUser, setCurrentUser] = useState<IUser | null>(null);
 
   return (
     <Context.Provider
       value={{
-        users,
         currentUser,
-        setUsers,
         setCurrentUser,
       }}
     >
