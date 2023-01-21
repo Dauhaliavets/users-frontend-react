@@ -30,6 +30,7 @@ function SignUpForm() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
+          autoComplete="off"
         />
       </Form.Group>
       <Form.Group className="mb-3 w-100" controlId="formEmail">
@@ -40,6 +41,7 @@ function SignUpForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          autoComplete="off"
         />
       </Form.Group>
       <Form.Group className="mb-3 w-100" controlId="formPassword">

@@ -33,13 +33,13 @@ const useSignIn = () => {
     if (response.ok) {
       const user = await response.json();
       setCurrentUser(user);
+      navigate('/home');
     } else {
       const errorResponse = await response.json();
       setError(errorResponse);
     }
 
     setIsLoading(false);
-    navigate('/home');
   };
 
   return { signIn, isLoading, error };

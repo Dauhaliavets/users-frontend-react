@@ -18,8 +18,6 @@ const useSignUp = () => {
   ): Promise<unknown> => {
     const isFilledFields = checkFilledFields({ name, email, password });
 
-    console.log({ name, email, password });
-    console.log(isFilledFields);
     if (!isFilledFields) {
       setError({ message: 'Please fill in all fields' });
       return;
@@ -39,13 +37,13 @@ const useSignUp = () => {
     if (response.ok) {
       const user = await response.json();
       setCurrentUser(user);
+      navigate('/home');
     } else {
       const errorResponse = await response.json();
       setError(errorResponse);
     }
 
     setIsLoading(false);
-    navigate('/home');
   };
 
   return { signUp, isLoading, error };
