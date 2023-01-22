@@ -3,6 +3,7 @@ import { Table, ToggleButton } from 'react-bootstrap';
 
 import { TableColumnTitles } from '../../constants/tableColumnTitles';
 import { UsersContext } from '../../context/usersContext';
+import TableRow from './TableRow';
 
 function UsersTable() {
   const [isCheckAll, setIsCheckAll] = useState<boolean>(false);
@@ -53,31 +54,9 @@ function UsersTable() {
         </tr>
       </thead>
       <tbody>
-        {users.map((user, index) => {
-          return (
-            <tr key={user._id}>
-              <td>
-                <ToggleButton
-                  className="mb-2"
-                  id={`toggle-check-${index}`}
-                  type="checkbox"
-                  variant="outline-primary"
-                  checked={checkedUsersById.includes(user._id)}
-                  value="1"
-                  onChange={() => handleClick(user._id)}
-                >
-                  {checkedUsersById.includes(user._id) ? 'UnCheck' : 'Check'}
-                </ToggleButton>
-              </td>
-              <td>{user._id}</td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.createdAt}</td>
-              <td>{user.updatedAt}</td>
-              <td>{user.blockedStatus ? 'Blocked' : 'Unblocked'}</td>
-            </tr>
-          );
-        })}
+        {users.map((user) => (
+          <TableRow key={user._id} user={user} handleClick={handleClick} />
+        ))}
       </tbody>
     </Table>
   );
