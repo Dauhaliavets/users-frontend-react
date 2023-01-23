@@ -44,9 +44,7 @@ function UsersTable() {
               checked={isCheckAll}
               value="1"
               onChange={() => handleSelectAll()}
-            >
-              {isCheckAll ? 'UnCheck All' : 'Check All'}
-            </ToggleButton>
+            ></ToggleButton>
           </th>
           {TableColumnTitles.map((item, index) => (
             <th key={index}>{item}</th>

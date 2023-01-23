@@ -25,9 +25,7 @@ function TableRow(props: PropsType) {
           checked={checkedUsersById.includes(user._id)}
           value="1"
           onChange={() => handleClick(user._id)}
-        >
-          {checkedUsersById.includes(user._id) ? 'UnCheck' : 'Check'}
-        </ToggleButton>
+        ></ToggleButton>
       </td>
       <td>{user._id}</td>
       <td>{user.name}</td>
